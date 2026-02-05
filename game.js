@@ -6,7 +6,7 @@ const player = {
     y: canvas.height - 60,
     width: 50,
     height: 50,
-    velocityY: 0,
+    velocityY: 0, // toucher ce parametre et celui en dessous pour verifier si le saut parait correct ou non
     gravity: 1.5,
     isJumping: false
 };
@@ -36,4 +36,24 @@ function gameLoop() {
     drawPlayer();
 
     requestAnimationFrame(gameLoop);
+}
+
+document.addEventListener('keydown', function(event) {
+    if(event.code == 'Space' && !player.isJumping) {
+        player.velocityY = -20;
+        player.isJumping = true;
+    } 
+});
+
+const obstacles = [];
+
+function createObstacle(){
+    const obstacle = {
+        x: canvas.width,
+        y: canvas.height - 60,
+        width: 50,
+        height: 50, 
+        speed: 6 + score * 0.05
+    };
+    obstacles.push(obstacle);
 }
