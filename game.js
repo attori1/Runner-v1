@@ -29,14 +29,7 @@ function updatePlayer() {
     }
 }
 
-function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    updatePlayer();
-    drawPlayer();
-
-    requestAnimationFrame(gameLoop);
-}
 
 document.addEventListener('keydown', function(event) {
     if(event.code == 'Space' && !player.isJumping) {
@@ -56,4 +49,43 @@ function createObstacle(){
         speed: 6 + score * 0.05
     };
     obstacles.push(obstacle);
+}
+
+function drawObstacles() {
+    ctx.fillStyle = '#0000000';
+    obstacles.forEach(obstacles => { ctx.fillRect(obstacles.x, obstacles.y, obstacles.width, obstacles.height);
+
+    });
+}
+
+function updateObstacles() {
+    obstacles.forEach( (obstacle, index) => { 
+        obstacle.x -= obstacle.speed;
+
+        // Retirer l'obstacle quand il sort de l'écran
+        if(obstacle.x + obstacle.width < 0) {
+            obstacles.splice(index, 1);
+            score += 1;
+        }
+    });
+}
+
+
+
+
+
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    updatePlayer();
+    drawPlayer();
+
+    drawPlayer();
+    drawObstacles();
+
+    if(Math.random() < 0.01) { // 1% de chance d'apparition d'obstacle par frame
+        createObstacle();
+    }
+
+    requestAnimationFrame(gameLoop);
 }
