@@ -123,7 +123,7 @@ function gameLoop(timestamp) {
     checkCollision();
     drawScore();
 
-    if(Math.random() < 0.01) {
+    if(Math.random() < 0.005) {
         createObstacle();
     }
     
