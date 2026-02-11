@@ -9,7 +9,7 @@ function drawScore() {
     scoreCtx.clearRect(0, 0, scoreCanvas.width, scoreCanvas.height);
     scoreCtx.fillStyle = '#000000';
     scoreCtx.font = '24px Arial';
-    scoreCtx.fillText('Score ${score}', 10, 30);
+    scoreCtx.fillText(`Score ${score}`, 10, 30); 
 }
 
 const player = {
@@ -29,8 +29,8 @@ function drawPlayer(){
 }
 
 function updatePlayer(deltaTime) {
-    player.y += player.velocityY * deltaTime * 0.016;
-    player.velocityY += player.gravity * deltaTime * 0.016;
+    player.y += player.velocityY * deltaTime * 0.016; // change la hauteur max du saut
+    player.velocityY += player.gravity * deltaTime * 0.016; // change le temps dans les airs
 
     // pour empecher le joueur de sortir du canvas
     if(player.y + player.height >= canvas.height - 10) {
@@ -82,7 +82,7 @@ function updateObstacles(deltaTime) {
 }
 
 function gameOver() {
-    alert('Game Over ! You scored ${score} points!')
+    alert(`Game Over ! You scored ${score} points!`)
     // Reset le jeu : 
     obstacles.length = 0;
     score = 0;
@@ -162,4 +162,5 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 */
+
 requestAnimationFrame(gameLoop);
