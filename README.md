@@ -14,7 +14,7 @@ Un astronaute fonce dans l'espace et doit esquiver rochers, lasers, satellites e
 
 | Icône | Effet |
 |-------|-------|
-| ⚡ Étoile cyan | Bouclier — absorbe un obstacle (5 s) |
+| ⭐️ Étoile cyan | Bouclier — absorbe un obstacle (5 s) |
 | ⏱ Horloge jaune | Ralenti — divise la vitesse par deux (3 s) |
 
 ## Lancer le jeu
