@@ -1,0 +1,220 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000008;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  overflow: hidden;
+  user-select: none;
+}
+
+#game-wrapper {
+  position: relative;
+  width: 800px;
+}
+
+#gameCanvas {
+  display: block;
+  border: 2px solid #00ffcc;
+  box-shadow:
+    0 0 20px #00ffcc55,
+    0 0 50px #00ffcc22,
+    inset 0 0 30px #00000088;
+}
+
+#hud {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.score-label {
+  font-size: 10px;
+  color: #00ffcc;
+  text-shadow: 0 0 8px #00ffcc88;
+  letter-spacing: 1px;
+}
+
+#powerup-bar {
+  position: absolute;
+  top: 38px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pu-badge {
+  font-size: 7px;
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: none;
+  letter-spacing: 1px;
+}
+
+.pu-badge.shield-badge {
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  background: rgba(0,255,204,0.12);
+  text-shadow: 0 0 6px #00ffcc;
+}
+
+.pu-badge.slowmo-badge {
+  color: #ffee00;
+  border: 1px solid #ffee00;
+  background: rgba(255,238,0,0.12);
+  text-shadow: 0 0 6px #ffee00;
+}
+
+.pu-badge.visible { display: block; animation: badgePulse 0.5s infinite alternate; }
+
+@keyframes badgePulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+.screen {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  z-index: 30;
+  background: radial-gradient(ellipse at center, rgba(0,10,40,0.92) 0%, rgba(0,0,10,0.96) 100%);
+}
+
+.screen.hidden { display: none; }
+
+.main-title {
+  font-size: 36px;
+  color: #00ffcc;
+  text-shadow:
+    0 0 15px #00ffcc,
+    0 0 40px #00ffcc66,
+    0 0 80px #00ffcc33;
+  letter-spacing: 6px;
+  animation: titlePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { text-shadow: 0 0 15px #00ffcc, 0 0 40px #00ffcc66; }
+  50%       { text-shadow: 0 0 25px #00ffcc, 0 0 60px #00ffcc88, 0 0 100px #00ffcc44; }
+}
+
+.subtitle {
+  font-size: 8px;
+  color: #7766ff;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #7766ff66;
+}
+
+.press-start {
+  font-size: 10px;
+  color: #ffffff99;
+  animation: blink 1s step-end infinite;
+  margin-top: 10px;
+}
+
+.controls-box {
+  font-size: 7px;
+  color: #ffffff44;
+  text-align: center;
+  line-height: 2.4;
+  border: 1px solid #ffffff11;
+  padding: 12px 20px;
+  background: rgba(0,255,204,0.03);
+}
+
+.controls-box span { color: #00ffcc88; }
+
+.over-title {
+  font-size: 26px;
+  color: #ff3355;
+  text-shadow: 0 0 20px #ff335588, 0 0 50px #ff335544;
+  letter-spacing: 4px;
+  animation: shake 0.4s ease 0.1s;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-6px); }
+  75%      { transform: translateX(6px); }
+}
+
+.score-final {
+  font-size: 13px;
+  color: #ffffff;
+}
+.score-final .val { color: #00ffcc; text-shadow: 0 0 8px #00ffcc; }
+
+.leaderboard {
+  background: rgba(0,255,204,0.04);
+  border: 1px solid #00ffcc33;
+  padding: 14px 24px;
+  min-width: 290px;
+}
+
+.lb-title {
+  font-size: 8px;
+  color: #00ffcc;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.lb-entry {
+  font-size: 8px;
+  color: #ffffff66;
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  gap: 20px;
+}
+
+.lb-entry.r1 { color: #ffd700; text-shadow: 0 0 6px #ffd700; }
+.lb-entry.r2 { color: #d0d0d0; }
+.lb-entry.r3 { color: #cd7f32; }
+
+.btn-retry {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  background: transparent;
+  border: 2px solid #00ffcc;
+  color: #00ffcc;
+  padding: 10px 22px;
+  cursor: pointer;
+  text-shadow: 0 0 8px #00ffcc;
+  box-shadow: 0 0 12px #00ffcc33;
+  transition: background 0.15s;
+  letter-spacing: 1px;
+  animation: blink 1.1s step-end infinite;
+}
+
+.btn-retry:hover { background: rgba(0,255,204,0.12); }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+#footer {
+  margin-top: 10px;
+  font-size: 6px;
+  color: #ffffff22;
+  letter-spacing: 2px;
+}

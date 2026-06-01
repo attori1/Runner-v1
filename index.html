@@ -1,21 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>My Runner</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASTRO-RUN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <body>
+<div id="game-wrapper">
 
-        <canvas id="gameCanvas" width="800" height="400">
+  <!-- Canvas principal -->
+  <canvas id="gameCanvas" width="800" height="300"></canvas>
 
-        </canvas>
+  <!-- HUD : score affiché sur le canvas pendant le jeu -->
+  <div id="hud">
+    <span class="score-label">SCORE <span id="scoreVal">00000</span></span>
+    <span class="score-label">BEST <span id="bestVal">00000</span></span>
+  </div>
 
-        <canvas id="scoreCanvas" width="800" height="50">
-            
-        </canvas>
-        
-        <script src="game.js"></script>
-    </body>
+  <!-- Indicateurs de power-up -->
+  <div id="powerup-bar">
+    <div class="pu-badge shield-badge" id="shieldBadge">⚡ SHIELD ACTIF</div>
+    <div class="pu-badge slowmo-badge" id="slowmoBadge">⏱ SLOW-MO ACTIF</div>
+  </div>
+
+  <!-- Écran de démarrage -->
+  <div class="screen" id="startScreen">
+    <div class="main-title">ASTRO-RUN</div>
+    <div class="subtitle">DEEP SPACE SURVIVAL</div>
+    <div class="press-start">— APPUYEZ SUR ESPACE POUR DÉCOLLER —</div>
+    <div class="controls-box">
+      <span>ESPACE / ↑</span> → SAUTER<br>
+      <span>ROCHER</span> → À ÉVITER<br>
+      <span>LASER</span> → À ÉVITER<br>
+      <span>SATELLITE</span> → VOL EN HAUTEUR<br>
+      <span>⚡ CYAN</span> → BOUCLIER 5 SEC<br>
+      <span>⏱ JAUNE</span> → RALENTI 3 SEC
+    </div>
+  </div>
+
+  <!-- Écran Game Over -->
+  <div class="screen hidden" id="gameoverScreen">
+    <div class="over-title">GAME OVER</div>
+    <div class="score-final">SCORE : <span class="val" id="finalScoreVal">00000</span></div>
+    <div class="leaderboard">
+      <div class="lb-title">★ HALL OF FAME ★</div>
+      <div id="lbEntries"></div>
+    </div>
+    <button class="btn-retry" onclick="restartGame()">ESPACE → RÉESSAYER</button>
+  </div>
+
+</div>
+
+<div id="footer">ASTRO-RUN v1.0 — HTML/CSS/JS ONLY</div>
+
+<script src="script.js"></script>
+</body>
 </html>
